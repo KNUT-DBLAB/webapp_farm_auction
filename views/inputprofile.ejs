@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="stylesheet" q type="text/css" href="../css/style.css">
+
+</head>
+
+<body>
+    <header class="welcome-header">
+        <h1 class="welcome-header__title">프로필 입력</h1>
+    </header>
+
+    <fieldset>
+        <H1>프로필 사진</H1>
+        <div class="sh_group">
+            <div class="sh_header">
+                <legend>프로필 수정</legend>
+                <table border="0" class="tbl_model">
+                    <caption><span class="blind">프로필 수정</span></caption>
+                    <colgroup>
+                        <col style="width:22%">
+                        <col>
+                    </colgroup>
+                    <tbody>
+                        <tr>
+                            <th scope="row">
+                                <div class="thcell">프로필 사진</div>
+                            </th>
+                            <td>
+                                <div class="tdcell">
+                                    <div class="profile_photo">
+                                        <img id="imgThumb"
+                                            src="https://static.nid.naver.com/images/web/user/default.png?type=s160"
+                                            width="100" height="100">
+                                        <span class="mask"></span>
+                                    </div>
+                                    <div class="btn_area_btm">
+                                        <span class="btn_file">
+                                            <label for="inputImage" class="btn_model"><b id="btnChangeProfile"
+                                                    class="btn2"
+                                                    onclick="clickcr(this,'prf.upimg','','',event);">사진변경</b></label>
+                                            <input type="file" id="inputImage" name="profileImage" accept="image/*">
+                                        </span>
+
+                                    </div>
+                                    <br>
+                                    <!-- <a href="javascript:;" class="btn_model"><b id="btnDelete" class="btn2 btn_disable"
+                                            onclick="clickcr(this,'prf.delimg','','',event);">삭제</b></a> -->
+                                </div>
+            </div>
+            </td>
+            </tr>
+            <tr>
+                <th scope="row">
+                    <div class="thcell"><label for="inpNickname">농가명</label></div>
+                </th>
+                <td>
+                    <div class="tdcell">
+                        <p class="contxt_webctrl nickname">
+                            <input type="text" name="nickname" id="inpNickname" value="xx농가" style="width:254px"
+                                onclick="clickcr(this,'prf.nick','','',event);">
+                            <!-- Enter 입력으로 submit이 되는걸 방지하기 위한 Input -->
+                            <input type="text" style="display: none;">
+                        </p>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+            </table>
+            <!-- <div class="btn_wrap">
+                    <a href="javascript:;" class="btn_model"><b id="btnConfirm" class="btn2 txt_disable" onclick="clickcr(this,'prf.apply','','',event);">적용</b></a>
+                    <a href="javascript:;" class="btn_model"><b id="btnCancel" class="btn2" onclick="clickcr(this,'prf.cancel','','',event);">취소</b></a>
+                </div> -->
+        </div>
+        </div>
+    </fieldset>
+    </form>
+    <div class="resize-triggers">
+        <div class="expand-trigger"></div>
+        <div class="contract-trigger"></div>
+    </div>
+    </div>
+
+
+
+    <fieldset>
+        <h2>지역 설정</h2>
+        <div class="sh_group">
+            <div class="sh_header">
+                <h2>지역 설정</h2>
+                <a href="javascript:toggle('region');" onclick="clickcr(this,'imn.reghelp','','',event);"
+                    class="link_help"><i id="i_region" class="spico ico_arr3_dn"></i></a>
+            </div>
+            <div class="sh_content">
+                <dl class="sh_lst2">
+                    <dt>관심지</dt>
+                    <dd>충청북도 제천시 천남동</dd>
+                </dl>
+            </div>
+            <p class="btn_area_btm"><a href="/user2/help/region?menu=nid&amp;lang=ko_KR"
+                    onclick="clickcr(this,'imn.regmodify','','',event);" class="btn_model"><b class="btn2">설정하기</b></a>
+            </p>
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <h2>브랜드 스토리</h2>
+        <br>
+        <!-- <div class="sh_group">
+        <div class="sh_header"> -->
+        <form>
+            <p><textarea cols="55" rows="10"></textarea></p>
+        </form>
+        <!-- </div></div> -->
+    </fieldset>
+
+    <ul class="check button1">
+        <li><button type="button" class="fpmgBt1" onClick="location.href='/'">다음에 수정</button></li>
+        <li><button type="button" class="fpmgBt2" onClick="location.href='/'">수정하기</button></li>
+    </ul>
+
+
+</body>
+
+</html>
