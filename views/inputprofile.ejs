@@ -15,7 +15,7 @@
     </header>
 
     <fieldset>
-        <H1>프로필 사진</H1>
+        <h2 class="profileh2">프로필 사진</h2>
         <div class="sh_group">
             <div class="sh_header">
                 <legend>프로필 수정</legend>
@@ -33,7 +33,7 @@
                             <td>
                                 <div class="tdcell">
                                     <div class="profile_photo">
-                                        <img id="imgThumb"
+                                        <img class="profile_photo2"id="imgThumb"
                                             src="https://static.nid.naver.com/images/web/user/default.png?type=s160"
                                             width="100" height="100">
                                         <span class="mask"></span>
@@ -61,7 +61,7 @@
                 <td>
                     <div class="tdcell">
                         <p class="contxt_webctrl nickname">
-                            <input type="text" name="nickname" id="inpNickname" value="xx농가" style="width:254px"
+                            <input type="text" name="nickname" id="inpNickname" value="xx농가"
                                 onclick="clickcr(this,'prf.nick','','',event);">
                             <!-- Enter 입력으로 submit이 되는걸 방지하기 위한 Input -->
                             <input type="text" style="display: none;">
@@ -86,36 +86,57 @@
     </div>
 
 
-
+<br><br>
     <fieldset>
-        <h2>지역 설정</h2>
+        <h2 class="profileh2">지역 설정</h2>
         <div class="sh_group">
             <div class="sh_header">
-                <h2>지역 설정</h2>
-                <a href="javascript:toggle('region');" onclick="clickcr(this,'imn.reghelp','','',event);"
-                    class="link_help"><i id="i_region" class="spico ico_arr3_dn"></i></a>
+
             </div>
             <div class="sh_content">
                 <dl class="sh_lst2">
-                    <dt>관심지</dt>
+                    <dt>지역</dt>
                     <dd>충청북도 제천시 천남동</dd>
                 </dl>
             </div>
-            <p class="btn_area_btm"><a href="/user2/help/region?menu=nid&amp;lang=ko_KR"
+            <p class="btn_area_btm"><a href="/location_select"
                     onclick="clickcr(this,'imn.regmodify','','',event);" class="btn_model"><b class="btn2">설정하기</b></a>
             </p>
         </div>
     </fieldset>
 
+    
+
+
+    <br><br>
     <fieldset>
-        <h2>브랜드 스토리</h2>
-        <br>
-        <!-- <div class="sh_group">
-        <div class="sh_header"> -->
+        <h2 class="profileh2">브랜드 스토리</h2>
+
+            <div class="sh_group">
+                <div class="sh_header">
+
+                </div>
+                <div class="sh_content">
+                    <dl class="sh_lst2">
+                        <img class="profile_photo3" id="profile_photo" src="https://static.nid.naver.com/images/web/user/default.png?type=s160">
+                        <img class="profile_photo3" id="profile_photo" src="https://static.nid.naver.com/images/web/user/default.png?type=s160">
+                    </dl>
+                </div>
+                <div class="btn_area_btm">
+                    <span class="btn_file">
+                        <label for="inputImage" class="btn_model"><b id="btnChangeProfile"
+                                class="btn2"
+                                onclick="clickcr(this,'prf.upimg','','',event);">사진 추가</b></label>
+                        <input type="file" id="inputImage" name="profileImage" accept="image/*">
+                    </span>
+
+                </div>
+                
+            </div>
         <form>
-            <p><textarea cols="55" rows="10"></textarea></p>
+            <p><textarea class="profile_textarea" required placeholder="농가에 대한 소개를 적어주세요"></textarea></p>
         </form>
-        <!-- </div></div> -->
+
     </fieldset>
 
     <ul class="check button1">

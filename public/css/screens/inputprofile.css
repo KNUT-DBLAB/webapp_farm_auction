@@ -1,6 +1,7 @@
+
 /* profile */
   
-fieldset, img {
+fieldset{
     border: 0;
   }
   
@@ -40,11 +41,16 @@ fieldset, img {
   div {
     display: block;
   }
+
+  .profile_photo2{
+    display: block; 
+    margin: 0px auto;
+  }
   
   .sh_group, .sh_group2, .sh_group3, .sh_group4 {
     margin: 16px 8px 0;
     padding: 32px 29px 30px;
-    text-align: left;
+
     border: 1px solid #dadada;
     border-radius: 2px;
     background: #fff;
@@ -132,7 +138,7 @@ fieldset, img {
   .btn_model .btn1, .btn_model .btn2, .btn_model .btn3 {
     min-width: 52px;
     height: 21px;
-    padding: 10px 12px 0;
+    padding: 10px 15px 0;
     color: #a3a3a3;
 }
 
@@ -146,7 +152,7 @@ fieldset, img {
 
 body, button, input, select, table, textarea {
   font-family: -apple-system,BlinkMacSystemFont,"Malgun Gothic","맑은 고딕",helvetica,"Apple SD Gothic Neo",sans-serif;
-  font-size: 12px;
+  font-size: 14px;
 }
 
 .profile_photo+.btn_area_btm {
@@ -158,7 +164,7 @@ body, button, input, select, table, textarea {
 
 .tbl_model .btn_area_btm {
   overflow: hidden;
-  margin-left: -8px;
+  margin-right: 3px;
   padding-top: 14px;
   text-align: left;
 }
@@ -175,3 +181,43 @@ body, button, input, select, table, textarea {
   border: 1px solid #bfbfbf;
   background: #fff;
 }
+
+.profileh2{
+    font-size: 1.4rem;
+    margin-block-start: 0.83em;
+    margin-block-end: 0.83em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+}
+
+
+.profile_loc_h2{
+    font-size: 1.4rem;
+    margin-block-start: 0.83em;
+    margin-block-end: 0.83em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.profile_photo2{
+    border-radius: 70%;
+    margin-left: -3px;
+}
+
+.profile_photo3{
+    display: block; 
+    margin: 20px auto;
+    width: 70%;
+    height: 85%;
+}
+
+.profile_textarea{
+    margin: 2%;
+    width: 96%;
+    height: 200px;
+    outline-color: lightsalmon;
+}
+

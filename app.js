@@ -40,7 +40,6 @@ app.use('/information', informationRouter);
 var informationfarmRouter = require('./routes/informationfarm');
 app.use('/informationfarm', informationfarmRouter);
 
-
 var checkfarmRouter = require('./routes/checkfarm');
 app.use('/checkfarm', checkfarmRouter);
 
@@ -49,6 +48,12 @@ app.use('/checkuser', checkuserRouter);
 
 var inputprofileRouter = require('./routes/inputprofile');
 app.use('/inputprofile', inputprofileRouter);
+
+var location_selectRouter = require('./routes/location_select');
+app.use('/location_select', location_selectRouter);
+
+var mainRouter = require('./routes/main');
+app.use('/main', mainRouter);
 
 
 // catch 404 and forward to error handler
