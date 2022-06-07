@@ -160,6 +160,11 @@ const routes = [
     name: 'ServiceCenter',
     component: () => import('../views/myPage/ServiceCenter.vue')
   },
+  {
+    path: '/farm_loc',
+    name: 'farm_loc',
+    component: () => import('../views/myPage/farm_loc.vue')
+  },
 
 
   //////////////////////////////////컴포넌트/////////////////////////////////
@@ -167,6 +172,16 @@ const routes = [
     path: '/bottomNav',
     name: 'bottomNav',
     component: () => import('../components/bottomNav.vue')
+  },
+  {
+    path: '/add_profile',
+    name: 'add_profile',
+    component: () => import('../components/add_profile.vue')
+  },
+  {
+    path: '/kakaoMap',
+    name: 'kakaoMap',
+    component: () => import('../components/kakaoMap.vue')
   },
 
 ]

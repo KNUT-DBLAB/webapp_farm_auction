@@ -132,7 +132,6 @@ export default {
             set: function (check) {
                 console.log(check);
                 if (check === true) {
-
                     this.check1 = true
                     this.check2 = true
                     this.check3 = true

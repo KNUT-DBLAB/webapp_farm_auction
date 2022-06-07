@@ -5,6 +5,7 @@ import store from './store'
 import vuetify from './plugins/vuetify'
 import { loadFonts } from './plugins/webfontloader'
 import Vue3Storage from "vue3-storage"
+// import VueHead from 'vue-head'
 
 // import "bootstrap/dist/css/bootstrap.min.css"
 // import "bootstrap/dist/js/bootstrap.js"
@@ -18,4 +19,5 @@ createApp(App)
   .use(store)
   .use(vuetify)
   .use(Vue3Storage)
+  // .use(VueHead)
   .mount('#app')

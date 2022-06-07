@@ -69,18 +69,6 @@
 		WHERE auction_Id = #{auction_id}
 	</update>
 
-    <select id="searchAuction" resultMap="AuctionDTO">
-        SELECT * FROM auction a, product p, farm_member f 
-        WHERE a.product_id = p.product_id and a.farm_id = f.farm_id and p.p_name LIKE #{keyword}
-        ORDER BY ABS(DATEDIFF(NOW(), deadline_date))
-    </select>
-
-    <!-- 검색어 추가 -->
-    <insert id="registKeyword">
-        INSERT INTO search_word
-        (keyword, ip, consumer_id, farm_id) VALUES
-        (#{keyword}, INET_ATON(#{ip}), #{consumer_id}, #{farm_id});
-    </insert>
 
     <!-- ############################################## 상품 CRUD #################################################### -->
     
@@ -172,5 +160,42 @@
 		DELETE FROM alert 
         WHERE alert_id = #{alert_id}
 	</delete>
+
+
+    <!-- ############################################## 경매 CRUD #################################################### -->
    
+    <select id="searchAuction" resultMap="AuctionDTO">
+        SELECT * FROM auction a, product p, farm_member f 
+        WHERE a.product_id = p.product_id and a.farm_id = f.farm_id and p.p_name LIKE #{keyword}
+        ORDER BY ABS(DATEDIFF(NOW(), deadline_date))
+    </select>
+
+    <!-- 검색어 추가 -->
+    <insert id="registKeyword">
+        INSERT INTO search_word
+        (keyword, ip, consumer_id, farm_id) VALUES
+        (#{keyword}, INET_ATON(#{ip}), #{consumer_id}, #{farm_id});
+    </insert>
+
+    <insert id="registConsumerKeyword">
+        INSERT INTO search_word (keyword, ip, consumer_id)
+        SELECT #{keyword}, INET_ATON(#{ip}), #{consumer_id} 
+        FROM DUAL WHERE NOT EXISTS(SELECT * FROM search_word 
+        WHERE (keyword=#{keyword} AND consumer_id=#{consumer_id}) OR (keyword=#{keyword} and ip=INET_ATON(#{ip})));
+    </insert>
+
+    <insert id="registFarmKeyword">
+        INSERT INTO search_word (keyword, ip, farm_id)
+        SELECT #{keyword}, INET_ATON(#{ip}), #{farm_id} 
+        FROM DUAL WHERE NOT EXISTS( SELECT * FROM search_word 
+        WHERE (keyword=#{keyword} AND farm_id=#{farm_id}) OR (keyword=#{keyword} and ip=INET_ATON(#{ip})));
+    </insert>
+
+    <select id="getPopularKeyword" resultType="String">
+        SELECT keyword FROM search_word 
+        GROUP BY keyword 
+        ORDER BY COUNT(*) DESC LIMIT 5;
+    </select>
+    
+
 </mapper>

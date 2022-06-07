@@ -1,4 +1,4 @@
-<template>
+wq<template>
     <div>
         <div class="main_nav_t_div">
             <nav class="main_t_nav">
@@ -50,7 +50,7 @@
 
         <div>
             <input multiple="multiple" @change="upload()" type="file" id="product_img_file" name="product_img_file"
-                accept="image/*"> <br>
+                accept="image/*"><br>
             <img src="image">
         </div>
 

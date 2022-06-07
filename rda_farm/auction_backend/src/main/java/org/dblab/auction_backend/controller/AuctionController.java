@@ -1,6 +1,10 @@
 package org.dblab.auction_backend.controller;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.dblab.auction_backend.domain.AuctionDTO;
 import org.dblab.auction_backend.domain.AuctionReviewDTO;
@@ -71,15 +75,6 @@ public class AuctionController {
         return auctionService.deleteAuction(auction_id);
     }
 
-    // 경매 검색 기능
-    @GetMapping(value = "/searchAuction/{checkUser}/{id}/{keyword}")
-    public List<AuctionDTO> searchAuction(@PathVariable("checkUser") String checkUser, @PathVariable("id") int id, @PathVariable("keyword") String keyword) {
-        
-        log.info("keyword: " + keyword);
-        return auctionService.searchAuction(checkUser, id, keyword);
-    }
-
-
 
     // #################################################### 상품 RUD #####################################################
 
@@ -130,5 +125,26 @@ public class AuctionController {
     public int deleteAuctionReview(@PathVariable("auction_id") int auction_id) {
 
         return auctionService.deleteAuctionReview(auction_id);
+    }
+
+
+    // #################################################### 검색 기능 #####################################################
+
+    // 경매 검색 기능
+    @GetMapping(value = "/searchAuction/{checkUser}/{id}/{keyword}")
+    public List<AuctionDTO> searchAuction(HttpServletRequest request, @PathVariable("checkUser") String checkUser, @PathVariable("id") int id, @PathVariable("keyword") String keyword) {
+        
+        log.info("keyword: " + keyword);
+        log.info("ip: " + request.getRemoteAddr());
+
+        return auctionService.searchAuction(request.getRemoteAddr(), checkUser, id, keyword);
+    }
+
+    // 인기 검색어 5개 가져오기
+    @GetMapping(value = "/popularKeyword")
+    public List<String> getPopularKeyword() {
+        
+        return auctionService.getPopularKeyword();
+        
     }
 }

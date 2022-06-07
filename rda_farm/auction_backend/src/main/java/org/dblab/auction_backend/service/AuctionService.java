@@ -1,6 +1,7 @@
 package org.dblab.auction_backend.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.dblab.auction_backend.domain.AuctionDTO;
 import org.dblab.auction_backend.domain.AuctionReviewDTO;
@@ -21,8 +22,6 @@ public interface AuctionService {
     public int deleteAuction(int auction_id);
 
     public int updateBidding(Bidding bidding);
-
-    public List<AuctionDTO> searchAuction(String checkUser, int id, String keyword);
 
 
     // #################################################### 상품 URD #####################################################
@@ -51,4 +50,13 @@ public interface AuctionService {
     public int registAlert(Bidding bidding);
 
     public int checkedAlert(int alert_id);
+
+
+    // #################################################### 검색 기능 #####################################################
+
+    public List<AuctionDTO> searchAuction(String ip, String checkUser, int id, String keyword);
+
+
+    public List<String> getPopularKeyword();
+    
 }

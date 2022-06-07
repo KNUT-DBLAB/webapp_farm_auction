@@ -24,34 +24,17 @@
     </div>
 
     <div class="div_search">
-        <input class="input_search" type="text" placeholder="검색어 입력" v-model="keyword">
-        <button class="button_search"  @keyup.enter="searchresultshow(keyword)" >검색</button>
+        <input class="input_search" type="text" placeholder="검색어 입력" @keyup.enter="searchAuction(keyword)" v-model="keyword">
+        <button class="button_search" @click="searchAuction(keyword)" >검색</button>
     </div>
     
     <fieldset>
-        
         <h2 class="profileh2">최근 검색어</h2>
         <div class="main_div-1">
-            <div class="btn_area_btm">
+            <div v-for="(keyword, index) in this.$store.state.keywordList" :key="index" class="btn_area_btm">
                 <span class="btn_file">
-                    <label for="inputImage" class="btn_model"><b id="btnChangeProfile" class="btn2"
-                            onclick="">복숭아</b></label>
+                    <label for="inputImage" class="btn_model"><b id="btnChangeProfile" class="btn2" @click="searchAuction(keyword)">{{keyword}}</b></label>
                 </span>
-
-                <span class="btn_file">
-                    <label for="inputImage" class="btn_model"><b id="btnChangeProfile" class="btn2"
-                            onclick="">복숭아</b></label>
-                </span>
-
-                <span class="btn_file">
-                    <label for="inputImage" class="btn_model"><b id="btnChangeProfile" class="btn2"
-                            onclick="">복숭아</b></label>
-                </span>
-                <span class="btn_file">
-                    <label for="inputImage" class="btn_model"><b id="btnChangeProfile" class="btn2"
-                            onclick="">복숭아</b></label>
-                </span>
-
             </div>
         </div>
     </fieldset>
@@ -62,100 +45,184 @@
         <div class="aside_area aside_popular">
             <h3 class="h_popular"><span></span></h3>
             <table class="tbl_home">
-                <caption>
-                    
-                    <span></span>
-                </caption>
-                <colgroup>
-                    <col>
-                    <col width="60">
-                    <col width="65">
-                </colgroup>
-                <thead>
-                    <tr>
-                        <th scope="col">구분</th>
-                        <th scope="col">현재가</th>
-                        <th scope="col">전일대비</th>
-                    </tr>
-                </thead>
-                <tbody>
+                <tbody  v-for="(keyword, index) in this.$store.state.popularKeywordList" :key="index">
                     <tr class="up">
-                        <th scope="row"><em>1.</em><a href="/item/main.naver?code=005930"
-                                onclick="">사과</a>
+                        <th scope="row"><em>{{index+1}}</em><a href="/item/main.naver?code=005930"
+                                onclick="">{{keyword}}</a>
                         </th>
-                        <td>75,000</td>
-                        <td><em class="bu_p bu_pup"><span class="blind">상승</span></em><span class="tah p11 red02"> 200
-                            </span></td>
-                    </tr>
-                    <tr class="down">
-                        <th scope="row"><em>2.</em><a href="/item/main.naver?code=096530"
-                                onclick="">자두</a>
-                        </th>
-                        <td>50,000</td>
-                        <td><em class="bu_p bu_pdn"><span class="blind">하락</span></em><span class="tah p11 nv01"> 300
-                            </span></td>
-                    </tr>
-                    <tr class="down">
-                        <th scope="row"><em>3.</em><a href="/item/main.naver?code=035720"
-                                onclick="">복숭아</a>
-                        </th>
-                        <td>90,600</td>
-                        <td><em class="bu_p bu_pdn"><span class="blind">하락</span></em><span class="tah p11 nv01"> 1,300
-                            </span></td>
-                    </tr>
-                    <tr class="up">
-                        <th scope="row"><em>4.</em><a href="/item/main.naver?code=011200"
-                                onclick="">수박</a>
-                        </th>
-                        <td>27,800</td>
-                        <td><em class="bu_p bu_pup"><span class="blind">상승</span></em><span class="tah p11 red02"> 2,550
-                            </span></td>
-                    </tr>
-                    <tr class="up">
-                        <th scope="row"><em>5.</em><a href="/item/main.naver?code=377330"
-                                onclick="">호두</a>
-                        </th>
-                        <td>18,050</td>
-                        <td><em class="bu_p bu_pup"><span class="blind">상승</span></em><span class="tah p11 red02"> 950
-                            </span></td>
                     </tr>
                 </tbody>
             </table>
-            <a href="/sise/lastsearch2.naver" class="btn_more" onclick=""><em
-                    class="btn_more4"><span class="blind">인기 검색 종목 더보기</span></em></a>
         </div>
     </div>
     </fieldset>
-<bottom-nav></bottom-nav>
+
+    <fieldset>
+        <div class="white_div">
+            <div class="goods_pay_section ">
+                <div class="goods_group">
+                    <ul class="goods_group_list">
+                        <li v-for="(auction, index) in this.$store.state.auctionList" :key="auction.auction_Id"
+                            id="_rowLi20220203162708CHK2022020394386781"
+                            class="goods_pay_item _interlockNo20220211200904406814">
+                            <div class="goods_item">
+                              <!-- a 태그 -> router 태그 -->
+                                <a href="/orderStatus/2022020310590721" class="goods_thumb">
+                                    <img :src='`http://localhost:8080/product_images/${auction.productDTO.product_img_name}.png`'
+                                        alt="" width="90" height="90" /></a>
+                                <div class="goods_info">
+                                    <a href="/orderStatus/2022020310590721" class="goods">
+                                        <p class="name">
+                                            {{auction.productDTO.product}}
+                                        </p>
+                                        <ul class="info">
+                                            <li><span class="blind">상품금액</span>{{auction.bid_price}}원</li>
+                                            <li class="date"><span class="blind">등록일</span> {{auction.productDTO.p_reg_date}}
+                                            </li>
+                                        </ul>
+                                    </a>
+                                    <a href="#"
+                                        class="state _statusName value_color_green _click(nmp.front.order.timeline.home.list.openDeliveryPopup(/o/orderStatus/deliveryTracking/2022020394386781/ORDER_DELIVERY/api)) _stopDefault">{{auction.bid_status}}
+                                        ({{auction.deadline_date}} 경매 종료)</a>
+                                    <p class="guide">
+                                        {{auction.productDTO.p_explanation}}
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="seller_item">
+                                <div class="inner">
+
+                                    <span class="seller">{{auction.f_farm_name}}</span>
+                                    <span class="tel">{{auction.f_phonenum}}</span>
+                                    <!-- <router-link :to="{ name: 'auction_detail', params: { auction}, }"> auction_detail </router-link> -->
+                                    <br><br>
+                                    
+                                    <a v-on:click="navigateProduct(auction.auction_Id, index)" 
+                                        class="state_button qna _click(nmp.front.order.timeline.home.list.shoppingInquiry(/merchant/shoppingInquiry/2022020394386781)) _stopDefault">경매 상세</a>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+
+    <!-- 하단 navbar -->
+    <div class="main_nav_b_div">
+        <nav class="main_b_nav">
+            <ul class="main_b_nav_list">
+                <li class="nav__btn">
+                    <a class="nav__link" href="main"><i class="fas fa-house fa-2x" aria-hidden="true"></i>
+                        
+                    </a>
+                </li>
+                <li class="nav__btn">
+                    <span class="nav__notification notification"></span>
+                    <a class="nav__link" href="search"><i class="fas fa-magnifying-glass fa-2x"
+                            aria-hidden="true"></i>
+                    </a>
+                </li>
+                <li class="nav__btn">
+                    <a class="nav__link" href="auction"><i class="fas fa-apple-whole fa-2x" aria-hidden="true"></i>
+                    </a>
+                </li>
+                <li class="nav__btn">
+                    <div class="nav__notification-dot"></div>
+                    <a class="nav__link" href="trand"><i class="fas fa-leaf fa-2x" aria-hidden="true"></i>
+                    </a>
+                </li>
+                <li class="nav__btn">
+                    <div class="nav__notification-dot"></div>
+                    <a class="nav__link" href="farm_mypage"><i class="fas fa-user-large fa-2x" aria-hidden="true"></i>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
 </div>
 </template>
 
 <script>
-import bottomNav from '@/components/bottomNav.vue';
+import axios from "axios"
+import Stomp from 'webstomp-client'
+import SockJS from 'sockjs-client'
 
 export default {
   name: "search",
-  components: {bottomNav},
   data() {
     return {
-      keyword: ''
+        checkUser: 'consumer',
+        id: 1,
+        keyword: '',
     }
   },
+  created(){
+    this.connect()
+    this.initPopularKeyword()
+  },
   methods: {
-    searchresultshow(keyword) {
+    searchAuction(keyword) {
       if (keyword !== ''){ //검색어를 입력한 경우
-        this.$router.push({
-          name: "SearchPage",
-          params: {
-            keyword: this.keyword,
-            isResultShow: true,
-          },
+        console.log('keyword: ' + keyword);
+        this.$store.commit('PUSH_KEYWORD_LIST', keyword);
+        
+        // 검색 데이터 받아오기!
+        axios.get(`http://localhost:8080/api/searchAuction/${this.checkUser}/${this.id}/${keyword}`)
+        .then(res => {
+            this.$store.commit('INIT_AUCTION_LIST', res.data);
+        })
+        .catch(err => {
+            console.log(err);
         });
+
+        // 검색어 초기화
         this.keyword = ''
-        console.log('"',keyword,'"' + ' 검색')
       } else {
         alert('검색어를 입력해주세요!')  //검색어를 입력하지 않은 경우
       }
+    },
+    connect() {
+        const serverURL = "http://localhost:8080/socket"
+        let socket = new SockJS(serverURL);
+        this.stompClient = Stomp.over(socket);
+        let headers = { TOKEN: this.$store.state.config.headers.TOKEN };
+
+        this.stompClient.connect(
+        headers,
+        frame => {
+            this.connected = true;
+            console.log('소켓 연결 성공', frame);
+
+            this.stompClient.subscribe("/send_bidding",  res => {
+
+                const response_bidding = JSON.parse(res.body);
+
+                if (response_bidding.auction_id != undefined)
+                    this.$store.commit('UPDATE_BID_PRICE', response_bidding);
+            });
+        },
+        error => {
+            // 소켓 연결 실패
+            console.log('소켓 연결 실패', error);
+            this.connected = false;
+        });        
+    },
+    initPopularKeyword(){
+
+        // 검색 데이터 받아오기!
+        axios.get('http://localhost:8080/api/popularKeyword')
+        .then(res => {
+            this.$store.commit('INIT_POPULAR_KEYWORD_LIST', res.data);
+        })
+        .catch(err => {
+            console.log(err);
+        });
+    },
+    navigateProduct (auction_id, index) {
+
+      this.$router.push({name:'auction_detail', params: { id: auction_id, index: index }});
     },
   }
 };

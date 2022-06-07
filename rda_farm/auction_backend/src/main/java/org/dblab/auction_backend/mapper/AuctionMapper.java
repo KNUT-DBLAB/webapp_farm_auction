@@ -1,12 +1,14 @@
 package org.dblab.auction_backend.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 import org.dblab.auction_backend.domain.AlertDTO;
 import org.dblab.auction_backend.domain.AuctionDTO;
 import org.dblab.auction_backend.domain.AuctionReviewDTO;
 import org.dblab.auction_backend.domain.ProductDTO;
+import org.dblab.auction_backend.domain.SearchWordDTO;
 
 public interface AuctionMapper {
 
@@ -21,10 +23,6 @@ public interface AuctionMapper {
     public int deleteAuction(@Param("auction_id") int auction_id);
 
     public int updateBidding(@Param("auction_id") int auction_id, @Param("bid_price") int bid_price);
-
-    public List<AuctionDTO> searchAuction(@Param("keyword") String keyword);
-
-    public int increseSearchVolume(@Param("keyword") String keyword);
 
 
     // #################################################### 상품 CURD #####################################################
@@ -60,4 +58,17 @@ public interface AuctionMapper {
     public int updateCheckedAlert(@Param("alert_id") int alert_id);
 
     public int deleteAlert(@Param("alert_id") int alert_id);
+
+
+    // #################################################### 검색 기능 #####################################################
+
+    public List<AuctionDTO> searchAuction(@Param("keyword") String keyword);
+
+    public int registKeyword(SearchWordDTO searchWordDTO);
+
+    public int registConsumerKeyword(SearchWordDTO searchWordDTO);
+
+    public int registFarmKeyword(SearchWordDTO searchWordDTO);
+
+    public List<String> getPopularKeyword();
 }

@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.sql.Date;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 import java.util.HashMap;
 
 import org.dblab.auction_backend.domain.AlertDTO;
@@ -12,6 +13,7 @@ import org.dblab.auction_backend.domain.AuctionDTO;
 import org.dblab.auction_backend.domain.AuctionReviewDTO;
 import org.dblab.auction_backend.domain.Bidding;
 import org.dblab.auction_backend.domain.ProductDTO;
+import org.dblab.auction_backend.domain.SearchWordDTO;
 import org.dblab.auction_backend.mapper.AuctionMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -95,19 +97,6 @@ public class AuctionServiceImpl implements AuctionService{
 
         return alertResult;
         // return mapperResult;
-    }
-
-    @Override
-    public List<AuctionDTO> searchAuction(String checkUser, int id, String keyword){
-        List<AuctionDTO> auctionDTOs = auctionMapper.searchAuction("%" + keyword + "%");
-
-        // 검색된 경매가 있다면 해당 경매의 search_volume을 1씩 올려준다.
-        if (!auctionDTOs.isEmpty()){
-            log.info(auctionDTOs.toString());
-            // auctionMapper.increseSearchVolume(keyword);
-        }
-
-        return auctionDTOs;
     }
 
 
@@ -259,9 +248,45 @@ public class AuctionServiceImpl implements AuctionService{
     }
 
 
+    // #################################################### 검색 기능 #####################################################
 
-    
-    
+    @Override
+    public List<AuctionDTO> searchAuction(String ip, String checkUser, int id, String keyword){
+        List<AuctionDTO> auctionDTOs = auctionMapper.searchAuction("%" + keyword + "%");
+
+        // 검색된 경매가 있다면 search_word 테이블에 추가
+        if (!auctionDTOs.isEmpty()){
+            log.info(auctionDTOs.toString());
+
+            // 키워드 중복 추가 방지를 위한 ip, id 확인 코드
+
+            // 키워드 추가
+            SearchWordDTO searchWordDTO = new SearchWordDTO();
+
+            searchWordDTO.setIp(ip);
+            searchWordDTO.setKeyword(keyword);
+
+            if (checkUser.equals("consumer")) {
+                searchWordDTO.setConsumer_id(id);
+                auctionMapper.registConsumerKeyword(searchWordDTO);
+            } else {
+                searchWordDTO.setFarm_id(id);
+                auctionMapper.registFarmKeyword(searchWordDTO);
+            }
+            
+            // auctionMapper.registKeyword(searchWordDTO);
+        }
+
+        return auctionDTOs;
+    }
+
+    @Override
+    public List<String> getPopularKeyword(){
+
+        List<String> keywords = auctionMapper.getPopularKeyword();
+        System.out.println(keywords.toString());
+        return keywords;
+    };
 
     
 }
